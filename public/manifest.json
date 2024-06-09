@@ -21,7 +21,7 @@
       }
     }
   ],
-  "identifier": "image-generator", 
+  "identifier": "img-gen", 
   "meta": {
     "avatar": "🎨",
     "tags": ["image", "generator", "ai"],
