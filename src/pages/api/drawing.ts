@@ -1,10 +1,11 @@
 import { PluginErrorType, createErrorResponse } from '@lobehub/chat-plugin-sdk';
 import { RequestData } from '@/type';
-import { pipeline } from 'transformers'; // Изменено
 
 export const config = {
   runtime: 'edge',
 };
+
+const API_URL = 'https://api-inference.huggingface.co/models/openskyml/dalle-3-xl';
 
 export default async (req: Request) => {
   if (req.method !== 'POST') return createErrorResponse(PluginErrorType.MethodNotAllowed);
@@ -12,16 +13,23 @@ export default async (req: Request) => {
   const { description } = (await req.json()) as RequestData;
 
   try {
-    const generator = await pipeline('text-to-image', 'openskyml/dalle-3-xl'); 
-
-    const image = await generator(description, { 
-      // Дополнительные параметры модели 
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${YOUR_HUGGINGFACE_API_TOKEN}`, // НЕОБХОДИМ API-токен
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ inputs: description })
     });
 
-    const imageBuffer = await image.toBuffer('png'); 
-    const imageBase64 = imageBuffer.toString('base64');
+    if (!response.ok) {
+      throw new Error(`Ошибка Hugging Face API: ${response.status}`);
+    }
 
-    const result = `![result](data:image/png;base64,${imageBase64})`;
+    const blob = await response.blob();
+    const imageObjectURL = URL.createObjectURL(blob); 
+
+    const result = `![result](${imageObjectURL})`;
 
     return new Response(result);
 
