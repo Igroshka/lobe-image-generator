@@ -16,7 +16,7 @@ export default async (req: Request) => {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${YOUR_HUGGINGFACE_API_TOKEN}`, // НЕОБХОДИМ API-токен
+        'Authorization': `Bearer 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`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ inputs: description })
