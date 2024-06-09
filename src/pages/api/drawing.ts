@@ -6,20 +6,23 @@ export const config = {
 };
 
 const API_URL = 'https://api-inference.huggingface.co/models/openskyml/dalle-3-xl';
+const API_TOKEN = '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';
 
 export default async (req: Request) => {
-  if (req.method !== 'POST') return createErrorResponse(PluginErrorType.MethodNotAllowed);
+  if (req.method !== 'POST') {
+    return createErrorResponse(PluginErrorType.MethodNotAllowed);
+  }
 
   const { description } = (await req.json()) as RequestData;
 
   try {
     const response = await fetch(API_URL, {
-      method: 'POST',
+      body: JSON.stringify({ inputs: description }),
       headers: {
-        'Authorization': `Bearer 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`,
+        'Authorization': `Bearer ${API_TOKEN}`,
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ inputs: description })
+      }, 
+      method: 'POST', 
     });
 
     if (!response.ok) {
