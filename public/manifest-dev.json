@@ -4,7 +4,7 @@
     {
       "url": "http://localhost:3400/api/drawing",
       "name": "drawing",
-      "description": "根据用户要求进行画图。",
+      "description": "Генератор изображений",
       "parameters": {
         "properties": {
           "description": {
@@ -22,12 +22,12 @@
     }
   ],
   "gateway": "http://localhost:3400/api/gateway",
-  "identifier": "pollinations-drawing-dev",
+  "identifier": "image-gen-dev",
   "meta": {
     "avatar": "🎨",
     "tags": ["drawing"],
-    "title": "授粉 AI 画图",
-    "description": "通过 pollinations.ai 进行图像生成"
+    "title": "Генератор изображений",
+    "description": "Генерирует изображения с помощью нейросети"
   },
   "type": "markdown",
   "version": "1"
