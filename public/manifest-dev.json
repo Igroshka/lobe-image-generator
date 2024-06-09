@@ -3,7 +3,7 @@
   "api": [
     {
       "url": "http://localhost:3400/api/drawing",
-      "name": "drawing",
+      "name": "img-gen",
       "description": "Генератор изображений",
       "parameters": {
         "properties": {
