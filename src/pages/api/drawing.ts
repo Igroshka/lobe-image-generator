@@ -35,6 +35,6 @@ export default async (req: Request) => {
 
   } catch (error) {
     console.error("Ошибка при генерации изображения:", error);
-    return createErrorResponse(PluginErrorType.Generic, "Ошибка при генерации изображения");
+    return createErrorResponse(PluginErrorType.PluginServerError, "Ошибка при генерации изображения");
   }
 };
