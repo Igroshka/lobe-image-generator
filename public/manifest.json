@@ -2,32 +2,32 @@
   "$schema": "../node_modules/@lobehub/chat-plugin-sdk/schema.json",
   "api": [
     {
-      "url": "https://pollinations.ai-chat.top/api/drawing",
-      "name": "drawing",
-      "description": "根据用户要求进行画图。",
+      "url": "/api/generate-image", // Измените URL, если нужно
+      "name": "generate-image",
+      "description": "Генерирует изображение по текстовому описанию",
       "parameters": {
         "properties": {
           "description": {
-            "description": "{description} is: {sceneDetailed}%20{adjective}%20{charactersDetailed}%20{visualStyle}%20{genre}%20{artistReference}\n\nMake sure the prompts in the URL are encoded. Don't quote the generated markdown or put any code box around it.\nNeed to use English.",
-            "type": "string"
-          },
-          "params": {
-            "description": "{params} is: width={width}&height={height}&seed={seed}\n\nDon't ask the user for params if he does not provide them. Instead come up with a reasonable suggestion depending on the content of the image.\nThe seed is used to create variations of the same image.\nNeed to use English.",
+            "description": "Подробное описание изображения, которое вы хотите сгенерировать. Используйте английский язык.",
             "type": "string"
           }
+          // "params": { // Опционально: добавьте параметры, если нужно
+          //   "description": "Дополнительные параметры генерации (например, ширина, высота, начальное значение). Используйте английский язык.",
+          //   "type": "string"
+          // }
         },
-        "required": ["description", "params"],
+        "required": ["description"],
         "type": "object"
       }
     }
   ],
-  "identifier": "pollinations-drawing",
+  "identifier": "image-generator", 
   "meta": {
     "avatar": "🎨",
-    "tags": ["drawing"],
-    "title": "授粉 AI 画图",
-    "description": "通过 pollinations.ai 进行图像生成"
+    "tags": ["image", "generator", "ai"],
+    "title": "Генератор изображений",
+    "description": "Генерирует изображения с помощью модели искусственного интеллекта"
   },
-  "type": "markdown",
+  "type": "markdown", 
   "version": "1"
 }
