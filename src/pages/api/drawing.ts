@@ -12,11 +12,13 @@ const generator = await pipeline('text-to-image', 'openskyml/dalle-3-xl');
 export default async (req: Request) => {
   if (req.method !== 'POST') return createErrorResponse(PluginErrorType.MethodNotAllowed);
 
-  const { description, params } = (await req.json()) as RequestData;
+  const { description } = (await req.json()) as RequestData; // Удалил 'params'
 
   try {
     // Генерируем изображение с помощью модели
-    const image = await generator(description, { /* Дополнительные параметры модели */ });
+    const image = await generator(description, { 
+      // Дополнительные параметры модели (если необходимо)
+    });
 
     // Конвертируем изображение в формат, подходящий для отправки в ответе 
     const imageBuffer = await image.toBuffer('png'); // Или другой формат, например 'jpeg'
