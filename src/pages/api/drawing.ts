@@ -1,6 +1,6 @@
 import { PluginErrorType, createErrorResponse } from '@lobehub/chat-plugin-sdk';
 import { RequestData } from '@/type';
-import { pipeline } from '@xenova/transformers';
+import { pipeline } from 'transformers'; // Изменено
 
 export const config = {
   runtime: 'edge',
@@ -12,7 +12,6 @@ export default async (req: Request) => {
   const { description } = (await req.json()) as RequestData;
 
   try {
-    // Динамически импортируем и загружаем модель внутри функции
     const generator = await pipeline('text-to-image', 'openskyml/dalle-3-xl'); 
 
     const image = await generator(description, { 
@@ -25,7 +24,7 @@ export default async (req: Request) => {
     const result = `![result](data:image/png;base64,${imageBase64})`;
 
     return new Response(result);
-    
+
   } catch (error) {
     console.error("Ошибка при генерации изображения:", error);
     return createErrorResponse(PluginErrorType.Unknown, "Ошибка при генерации изображения");
